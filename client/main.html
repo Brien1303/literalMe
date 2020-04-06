@@ -7,7 +7,6 @@
     {{> navBar}}
     {{> mainBody}}
     {{> footerBar}}
-
   </div>
 </body>
 
@@ -68,18 +67,18 @@
         </button>
       </div>
       <div class="modal-body">
-        <img src="addImageModal" class=mountains>
+        <img src="{{bookURL}}" class="mountains">
        <div class="input-group mb-3">
         <div class="input-group-prepend">
-    <span class="input-group-text" id="Title">Title</span>
+    <span class="input-group-text" >Title</span>
         </div>
-  <input type="text" class="form-control" placeholder="Name of Book" aria-label="Username" aria-describedby="basic-addon1">
+  <input type="text" class="form-control" id="Title" placeholder="Name of Book" aria-label="Username" aria-describedby="basic-addon1">
           </div>
     <div class="input-group mb-3">
       <div class="input-group-prepend">
-    <span class="input-group-text" id="bookURL">Book URL</span>
+    <span class="input-group-text" >Book URL</span>
       </div>
-  <input type="text" class="form-control" id="URL" aria-describedby="basic-addon3">
+  <input type="text" class="form-control" id="bookURL" aria-describedby="basic-addon3">
     </div>
     <div class="input-group">
       <div class="input-group-prepend">
@@ -103,40 +102,94 @@
 <template name="mainBody">
   <main role="main">
     {{> myJumbo}}
+    {{>veiwBook}}
     <div class="album py-5 bg-light">
-      <div class="container">
-        <div class="row">
-          {{>allBooks}}
-          
-        </div> <!-- /row for all cards -->
-
-      </div>
-    </div>
-
-  </main>
-</template>
-
-<template name = "allBooks">
-  <div class="row">
-    {{#each allBooks}}
-    <div class="col-md-4">
+      <div class="container ">
+        <div class="row" >
+          {{#each allBooks}}
+          <div class="col-md-4" id={{_id}} >
             <div class="card mb-4 shadow-sm">
-              <img src="{{bookURL}}" class=mountains alt="">
+              <img src={{bookURL}} class="mountains" alt="">
               <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <p class="card-text">{{Description}}</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary ">View</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary ">Edit</button>
                   </div>
                   <small class="text-muted">9 mins</small>
                 </div>
               </div>
             </div>
-          </div> <!-- /col -->
-          {{/each}}
+          </div> 
+          {{/ each}}
+        </div> <!-- /row for all cards -->
+      </div>
+    </div>
+  </main>
+</template> <!-- mainBody -->
+
+<template name = "allBooks">
+  <div class="row">
+   
   </div>
 </template>
+<template name="veiwBook">
+  <div class="row">
+    <div class="col-4">
+      <!-- Modal -->
+      <div class="modal fade bd-example-modal-xl" id="veiwBookModal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="card mb-3 text-left" style="max-width: 1040px; font-size: 1.5rem;">
+                <div class="row no-gutters">
+                  <div class="col-md-4">
+                    <img src="" class="card-img veiwHolder" alt="">
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <h5 class="card-title " id="veiwTitle">{{title}}</h5>
+                      <h6 class="card-subtitle text-muted" id="veiwAuthor">{{author}}</h6>
+                      <p class="card-text " id="veiwDesc">{{desc}}</p>
+                      <input id="veiwId" type="hidden">
+                    </div>
+                  </div>
+                </div>
+              </div> <!-- card/div -->
+            </div>
+            <div class="modal-footer">
+             <i class="fa fa-trash tColor js-delete"></i>
+            </div>
+          </div>
+        </div>
+        <!-- ====================================== -->
+        <!-- Modal -->
+          <div class="modal fade" id="confirmModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">Are you sure you want delete this book?</h5>
+                </div>
+                <div class="modal-footer">
+                  <input id="deleteId" type="hidden">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                  <button type="button" class="btn btn-primary js-confirm" data-dismiss="modal">Yes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+       <!-- ====================================== -->
+      </div>
+    </div>
+  </div>
+</template> <!-- veiwBook -->
 <template name="footerBar">
   <footer class="text-muted">
     <div class="container">
