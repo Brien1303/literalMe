@@ -86,6 +86,12 @@
       </div>
   <textarea class="form-control" id="Description" aria-label="With textarea"></textarea>
   </div>
+  <div class="input-group mb-3">
+        <div class="input-group-prepend">
+    <span class="input-group-text" >Author</span>
+        </div>
+  <input type="text" class="form-control" id="Author" placeholder="Name of Author" aria-label="Username" aria-describedby="basic-addon1">
+          </div>
 
       </div>
       <div class="modal-footer">
@@ -102,7 +108,8 @@
 <template name="mainBody">
   <main role="main">
     {{> myJumbo}}
-    {{>veiwBook}}
+    {{> veiwBook}}
+    {{> editBook}}
     <div class="album py-5 bg-light">
       <div class="container ">
         <div class="row" >
@@ -111,11 +118,12 @@
             <div class="card mb-4 shadow-sm">
               <img src={{bookURL}} class="mountains" alt="">
               <div class="card-body">
-                <p class="card-text">{{Description}}</p>
+                <p class="card-text">{{Title}}</p>
+                <i class="fa fa-trash tColor js-delete"></i>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary ">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary ">Edit</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary js-veiwBook ">View</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary js-editMe">Edit</button>
                   </div>
                   <small class="text-muted">9 mins</small>
                 </div>
@@ -135,6 +143,7 @@
   </div>
 </template>
 <template name="veiwBook">
+
   <div class="row">
     <div class="col-4">
       <!-- Modal -->
@@ -155,9 +164,9 @@
                   </div>
                   <div class="col-md-8">
                     <div class="card-body">
-                      <h5 class="card-title " id="veiwTitle">{{title}}</h5>
-                      <h6 class="card-subtitle text-muted" id="veiwAuthor">{{author}}</h6>
-                      <p class="card-text " id="veiwDesc">{{desc}}</p>
+                      <h5 class="card-title " id="veiwTitle"></h5>
+                      <h6 class="card-subtitle text-muted" id="veiwAuthor"></h6>
+                      <p class="card-text " id="veiwDescription"></p>
                       <input id="veiwId" type="hidden">
                     </div>
                   </div>
@@ -165,7 +174,7 @@
               </div> <!-- card/div -->
             </div>
             <div class="modal-footer">
-             <i class="fa fa-trash tColor js-delete"></i>
+             
             </div>
           </div>
         </div>
@@ -190,6 +199,58 @@
     </div>
   </div>
 </template> <!-- veiwBook -->
+
+<template name="editBook">
+  <div class="row">
+    <div class="col">
+      <!-- Modal -->
+      <div class="modal fade" id="editBookModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Edit Book</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+               <img class="editHolder placeHolder " src="" alt="">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-default ">Title</span>
+                </div>
+                <input type="text" class="form-control" id="editbookTitle" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+              </div> <!-- title input/div -->
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-default ">bookURL</span>
+                </div>
+                <input type="text" class="form-control" id="editbookURL" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+              </div> <!-- path input/div -->
+               <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-default ">Author</span>
+                </div>
+                <input type="text" class="form-control" id="editbookAuthor" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+              </div> <!-- author input/div -->
+               <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Description</span>
+                </div>
+                <textarea class="form-control" id="editbookDescription" aria-label="With textarea"></textarea>
+               </div> <!-- description input/div -->
+               <input id="editId" type="hidden">
+              </div> <!-- modal-body -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary js-closeMe" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary js-saveeditMe">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>  
+</template> <!-- editBook -->
 <template name="footerBar">
   <footer class="text-muted">
     <div class="container">
