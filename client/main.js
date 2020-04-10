@@ -69,7 +69,7 @@ Template.mainBody.events({
 		var theAuthor = booksdb.findOne({_id:myId}).Author;
 		$("#veiwId").val(myId);
 		$("#veiwTitle").html(theTitle);
-		$("#veiwDes").html(theDes);
+		$("#veiwDescription").html(theDes);
 		$("#veiwAuthor").html(theAuthor);
 		$(".veiwHolder").attr("src", thePath);
 
@@ -103,11 +103,13 @@ Template.mainBody.events({
         },
         'click .js-delete'(event, instance){
 		var myId =this._id;
-	$("#"+this._id).fadeOut('slow',function	(){
+	$("#"+this._id).fadeOut('slow', function(){
 		booksdb.remove({_id:myId});
 		console.log(myId);
-		}
-	},
+	})
+},
+
+
 	});
 
 
