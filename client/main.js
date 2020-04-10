@@ -76,6 +76,7 @@ Template.mainBody.events({
 		
 		// instance.veiw.set(instance).set(instance.veiw.get(myId) + 1);
 	},
+
     'click .js-editMe'(event, instance){
     	$("#editBookModal").modal("show");
        var myId = this._id;
@@ -100,13 +101,13 @@ Template.mainBody.events({
     'input #editbookPath'(event, instance){
             $(".editHolder").attr("src",$("#editbookPath").val());
         },
-
-        'click .js.delete' (event, instance){
-	var myId =this._id;
+        'click .js-delete'(event, instance){
+		var myId =this._id;
 	$("#"+this._id).fadeOut('slow',function	(){
 		booksdb.remove({_id:myId});
 		console.log(myId);
 		}
+	},
 	});
 
 
